@@ -1,4 +1,4 @@
-const appRoot = document.getElementById('app');
+const appRoot = document.getElementById("app");
 
 class IndecisionApp extends React.Component {
   render() {
@@ -42,8 +42,12 @@ class Action extends React.Component {
 }
 
 class Options extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleRemoveAll = this.handleRemoveAll.bind(this);
+  }
   handleRemoveAll() {
-    alert('handleRemoveAll');
+    console.log(this.props.options)
   }
   render() {
     return (
@@ -70,10 +74,21 @@ class Option extends React.Component {
 }
 
 class AddMore extends React.Component {
+  handleAddOption(e) {
+    e.preventDefault();
+    const option = e.target.elements.option.value.trim();
+    if (option) {
+      alert(option);
+      e.target.elements.option.value = '';
+    }
+  }
   render() {
     return (
       <div>
-        Add Option Component Here
+        <form onSubmit={this.handleAddOption}>
+          <input type="text" name="option" />
+          <button>Add option</button>
+        </form>
       </div>
     );
   }
